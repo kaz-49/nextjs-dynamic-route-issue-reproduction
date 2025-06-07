@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Page({
   params,
@@ -9,9 +9,11 @@ export default function Page({
 }) {
     const [slug, setSlug] = useState([""])
 
-    params.then(params => {
-        console.log("READ PARAMS")
-        setSlug(params.slug ? params.slug : [])
-        // setSlug(params.slug) This throws an error: "Argument of type 'string[] | undefined' is not assignable to parameter of type 'SetStateAction<string[]>"
-    })
+    useEffect(() => {
+      params.then(params => {
+          console.log("READ PARAMS")
+          setSlug(params.slug ? params.slug : [])
+          // setSlug(params.slug) This throws an error: "Argument of type 'string[] | undefined' is not assignable to parameter of type 'SetStateAction<string[]>"
+      })
+    }, slug)
 }
